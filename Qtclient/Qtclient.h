@@ -24,6 +24,7 @@ public:
     ~Qtclient();
 
     void onPunchCardButtonClicked();
+    void Clock(const QString& employeeId);
 
 private:
     Ui::QtclientClass ui;
