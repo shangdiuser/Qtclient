@@ -15,7 +15,7 @@ public:
     void sendRequest(const QUrl& url, const QByteArray& data);
 
 private:
-       QNetworkAccessManager* networkManager;
+      // QNetworkAccessManager* networkManager;
 };
 
 #endif // REQUESTTOOL_H

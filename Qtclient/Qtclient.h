@@ -8,7 +8,7 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QDateTime>
-#include"requestTool.h"
+#include"HttpHandle.h"
 class Qtclient : public QMainWindow
 {
     Q_OBJECT
@@ -24,8 +24,10 @@ public:
     ~Qtclient();
 
     void onPunchCardButtonClicked();
-    void Clock(const QString& employeeId);
+ 
 
 private:
     Ui::QtclientClass ui;
+    QNetworkAccessManager* manager;
+    QNetworkReply* reply;
 };

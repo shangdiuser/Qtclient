@@ -87,7 +87,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="requestTool.cpp" />
+    <ClCompile Include="HttpHandle.cpp" />
     <QtRcc Include="Qtclient.qrc" />
     <QtUic Include="Qtclient.ui" />
     <QtMoc Include="Qtclient.h" />
@@ -95,7 +95,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="requestTool.h" />
+    <QtMoc Include="HttpHandle.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>

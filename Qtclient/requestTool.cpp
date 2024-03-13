@@ -4,12 +4,12 @@
 requestTool::requestTool(QObject* parent)
 {
     // 创建连接管理器
-      networkManager = new QNetworkAccessManager(this);
+     // networkManager = new QNetworkAccessManager(this);
 }
 
 // 在需要发送请求的地方，使用连接管理器发送请求
  void requestTool::sendRequest(const QUrl& url, const QByteArray& data) {
-     
+  /*
     // 创建网络请求
     QNetworkRequest request(url);
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
@@ -45,5 +45,5 @@ requestTool::requestTool(QObject* parent)
         // 释放资源
         reply->deleteLater();
 
-        });
+        });*/
 }

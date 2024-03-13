@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     Qtclient w;
     w.show();
-    requestTool Tool;
+  //  requestTool Tool;
 
     /*
     // 构造 JSON 数据
