@@ -46,12 +46,14 @@ void Qtclient::Clock(const QString& employeeId)
     QByteArray jsonData = jsonDoc.toJson();
 
     // 创建网络请求
-    QNetworkAccessManager manager;
+    QNetworkAccessManager *manager = new QNetworkAccessManager(this);
+    //
     QNetworkRequest request(QUrl("http://localhost:8080/Clock/"));
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
 
+    QNetworkReply* reply = manager->post(request, jsonData);
     // 发送 POST 请求
-    QNetworkReply* reply = manager.post(request, jsonData);
+   // QNetworkReply* reply = manager.post(request, jsonData);
 
     // 处理响应
     QObject::connect(reply, &QNetworkReply::finished, [&]() {
