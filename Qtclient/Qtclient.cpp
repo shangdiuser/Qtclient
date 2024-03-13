@@ -53,8 +53,6 @@ void Qtclient::Clock(const QString& employeeId)
     // 发送 POST 请求
     QNetworkReply* reply = manager.post(request, jsonData);
 
-    
-
     // 处理响应
     QObject::connect(reply, &QNetworkReply::finished, [&]() {
         if (reply->error() == QNetworkReply::NoError) {
