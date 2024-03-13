@@ -18,22 +18,51 @@ void Qtclient::onPunchCardButtonClicked() {
     QString employeeId = ui.textEdit_4->toPlainText();
 
     qDebug() << employeeId << "employeeId";
-    // 获取员工ID
-    //QString employeeId = "123"; // 这里需要根据实际情况获取员工ID
-    // 发射信号
-   // emit punchCardRequested(employeeId);
+   
    HttpHandle handle;
-    //handle.getRequest(employeeId);
-  // handle.getRequest("http://localhost:8080/Clock");
-//   handle.Clock("http://localhost:8080/Clock");
-   handle.Clock(employeeId);
 
+   QByteArray buf = handle.Clock(employeeId);
+   
+   int jsonDataStart = buf.indexOf("{");
+   int jsonDataEnd = buf.lastIndexOf("}");
+
+   if (jsonDataStart != -1 && jsonDataEnd != -1) {
+       QByteArray jsonData = buf.mid(jsonDataStart, jsonDataEnd - jsonDataStart + 1);
+
+       // 解析 JSON 数据
+       QJsonParseError error;
+       QJsonDocument jsonDoc = QJsonDocument::fromJson(jsonData, &error);
+
+       if (error.error == QJsonParseError::NoError && jsonDoc.isObject()) {
+           QJsonObject jsonObj = jsonDoc.object();
+           QString punch_in_time = jsonObj["punch_in_time"].toString();
+           qDebug() << "punch_in_time:" << punch_in_time;
+
+           ui.textEdit_6->setText(jsonObj["punch_in_time"].toString());
+           QString chidao = "迟到";
+           QString zheng = "正常";
+           if (1 == jsonObj["is_late"].toInt()) {
+               ui.textEdit_5->setText(QString::fromUtf8("chidao"));
+           }
+           else
+           {
+               ui.textEdit_5->setText(QString::fromUtf8("zhengcahng"));
+           }
+          // jsonObject["name"] = query.value("name").toString(); // 添加员工姓名
+          // jsonObject["department"] = query.value("department").toString(); // 添加部门信息
+           ui.textEdit->setText(jsonObj["name"].toString());
+           ui.textEdit_2->setText(jsonObj["department"].toString());
+
+
+       }
+       else {
+           qDebug() << "JSON parse error:" << error.errorString();
+       }
+   }
+   else {
+       qDebug() << "Invalid JSON data in the reply";
+   }
 }
-
-
-
-
-
 
 void Qtclient::onPunchCardRequested(const QString& employeeId) {
    

@@ -8,8 +8,8 @@
 #include<QJsonObject>
 #include<QJsonParseError>
 #include<QJsonArray>
-#include <QJsonDocument>
-#include <QJsonObject>
+#include"Qtclient.h"
+
 HttpHandle::HttpHandle(QObject *parent) :
     QObject(parent),manager(new QNetworkAccessManager(this))
 {
@@ -94,16 +94,27 @@ QString HttpHandle::getMusicLyric(QString artist, QString name)
     return lyric;
 }
 
+void HttpHandle::ClokInfoShow(QJsonObject jsonData)
+{
+    
+  
+
+    
+
+
+}
+
 //打卡
 QByteArray HttpHandle::Clock(const QString& employeeId)
 {
+  
     // 构造 JSON 数据
     QJsonObject jsonObject;
     jsonObject["employee_id"] = employeeId;
     jsonObject["punch_in_time"] = QDateTime::currentDateTime().toString(Qt::ISODate);
     jsonObject["punch_out_time"] = QDateTime::currentDateTime().addSecs(8 * 3600).toString(Qt::ISODate);
-    jsonObject["is_late"] = false;
-    jsonObject["is_absent"] = false;
+    jsonObject["is_late"] = 0;
+    jsonObject["is_absent"] = 0;
     jsonObject["fine_amount"] = 0;
 
     qDebug() << employeeId << "QJsonObject employeeId";
@@ -113,7 +124,7 @@ QByteArray HttpHandle::Clock(const QString& employeeId)
     QByteArray jsonData = jsonDoc.toJson();
 
 
-    QString urlInt =QString("http://localhost:8080/Clock");
+    QString urlInt = QString("http://localhost:8080/Clock");
 
     QString url = urlInt;
     QNetworkRequest request;
@@ -134,5 +145,10 @@ QByteArray HttpHandle::Clock(const QString& employeeId)
 
     QByteArray buf = reply->readAll();
     qDebug() << "reoly" << buf;
-    return buf;
-}
+
+   
+
+        return buf;
+    }
+
+
