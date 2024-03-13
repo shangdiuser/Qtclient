@@ -13,7 +13,7 @@ Qtclient::Qtclient(QWidget *parent)
 Qtclient::~Qtclient()
 {}
 
-// Ä³¸ö´ò¿¨°´Å¥µÄµã»÷²Ûº¯Êý
+// Ä³ï¿½ï¿½ï¿½ò¿¨°ï¿½Å¥ï¿½Äµï¿½ï¿½ï¿½Ûºï¿½ï¿½ï¿½
 void Qtclient::onPunchCardButtonClicked() {
     QString employeeId = ui.textEdit_4->toPlainText();
 
@@ -29,7 +29,7 @@ void Qtclient::onPunchCardButtonClicked() {
    if (jsonDataStart != -1 && jsonDataEnd != -1) {
        QByteArray jsonData = buf.mid(jsonDataStart, jsonDataEnd - jsonDataStart + 1);
 
-       // ½âÎö JSON Êý¾Ý
+       // ï¿½ï¿½ï¿½ï¿½ JSON ï¿½ï¿½ï¿½ï¿½
        QJsonParseError error;
        QJsonDocument jsonDoc = QJsonDocument::fromJson(jsonData, &error);
 
@@ -39,20 +39,15 @@ void Qtclient::onPunchCardButtonClicked() {
            qDebug() << "punch_in_time:" << punch_in_time;
 
            ui.textEdit_6->setText(jsonObj["punch_in_time"].toString());
-           QString chidao = "³Ùµ½";
-           QString zheng = "Õý³£";
-           if (1 == jsonObj["is_late"].toInt()) {
-               ui.textEdit_5->setText(QString::fromUtf8("chidao"));
-           }
-           else
-           {
-               ui.textEdit_5->setText(QString::fromUtf8("zhengcahng"));
-           }
-          // jsonObject["name"] = query.value("name").toString(); // Ìí¼ÓÔ±¹¤ÐÕÃû
-          // jsonObject["department"] = query.value("department").toString(); // Ìí¼Ó²¿ÃÅÐÅÏ¢
+         
+         
+               ui.textEdit_5->setText(jsonObj["is_late"].toString());
+          
+          // jsonObject["name"] = query.value("name").toString(); // ï¿½ï¿½ï¿½Ô±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+          // jsonObject["department"] = query.value("department").toString(); // ï¿½ï¿½Ó²ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
            ui.textEdit->setText(jsonObj["name"].toString());
            ui.textEdit_2->setText(jsonObj["department"].toString());
-
+           qDebug() << "å“ˆå“ˆå“ˆå“ˆ:" ;
 
        }
        else {
@@ -66,7 +61,7 @@ void Qtclient::onPunchCardButtonClicked() {
 
 void Qtclient::onPunchCardRequested(const QString& employeeId) {
    
-    // ¹¹Ôì JSON Êý¾Ý
+    // ï¿½ï¿½ï¿½ï¿½ JSON ï¿½ï¿½ï¿½ï¿½
     QJsonObject jsonObject;
     jsonObject["employee_id"] = employeeId;
     jsonObject["punch_in_time"] = QDateTime::currentDateTime().toString(Qt::ISODate);
@@ -77,46 +72,46 @@ void Qtclient::onPunchCardRequested(const QString& employeeId) {
 
     qDebug() << employeeId << "QJsonObject employeeId";
 
-    // ×ª»»Îª JSON ÎÄµµ
+    // ×ªï¿½ï¿½Îª JSON ï¿½Äµï¿½
     QJsonDocument jsonDoc(jsonObject);
     QByteArray jsonData = jsonDoc.toJson();
 
-    // µ÷ÓÃ sendRequest º¯Êý£¬´«µÝÕýÈ·µÄ URL ºÍ JSON Êý¾Ý
-    QUrl url("http://localhost:8080/Clock"); // Ìæ»»ÎªÊµ¼ÊµÄ URL
+    // ï¿½ï¿½ï¿½ï¿½ sendRequest ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È·ï¿½ï¿½ URL ï¿½ï¿½ JSON ï¿½ï¿½ï¿½ï¿½
+    QUrl url("http://localhost:8080/Clock"); // ï¿½æ»»ÎªÊµï¿½Êµï¿½ URL
    // requestTool::sendRequest(url, jsonData);
-    // ÔÚÐèÒªµ÷ÓÃ sendRequest µÄµØ·½£¬´´½¨Ò»¸ö requestTool ¶ÔÏó£¬²¢µ÷ÓÃÆä sendRequest º¯Êý
+    // ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ sendRequest ï¿½ÄµØ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ requestTool ï¿½ï¿½ï¿½ó£¬²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ sendRequest ï¿½ï¿½ï¿½ï¿½
    // requestTool tool;
    // tool.sendRequest(url, jsonData);
 
     /*
-    // ´´½¨ÍøÂçÇëÇó
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     QNetworkAccessManager manager;
     QNetworkRequest request(QUrl("http://localhost:8080/Clock"));
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
 
-    // ·¢ËÍ POST ÇëÇó
+    // ï¿½ï¿½ï¿½ï¿½ POST ï¿½ï¿½ï¿½ï¿½
     QNetworkReply* reply = manager.post(request, jsonData);
 
-    qDebug() << reply << "·¢ËÍ POST ÇëÇó";
+    qDebug() << reply << "ï¿½ï¿½ï¿½ï¿½ POST ï¿½ï¿½ï¿½ï¿½";
 
 
   
 
-    // ²é¿´ÇëÇóµØÖ·
+    // ï¿½é¿´ï¿½ï¿½ï¿½ï¿½ï¿½Ö·
     QUrl requestUrl = request.url();
     qDebug() << "Request URL:" << requestUrl.toString();
 
-    // ²é¿´ÇëÇóÍ·
+    // ï¿½é¿´ï¿½ï¿½ï¿½ï¿½Í·
     QList<QByteArray> requestHeaders = request.rawHeaderList();
     qDebug() << "Request Headers:";
     for (const QByteArray& header : requestHeaders) {
         qDebug() << header << ":" << request.rawHeader(header);
     }
 
-    // ²é¿´ÇëÇóÌå
+    // ï¿½é¿´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     qDebug() << "Request Body:" << jsonData;
 
-    // ´¦ÀíÏìÓ¦
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦
     QObject::connect(reply, &QNetworkReply::finished, [&]() {
         if (reply->error() == QNetworkReply::NoError) {
             QByteArray responseData = reply->readAll();
@@ -126,7 +121,7 @@ void Qtclient::onPunchCardRequested(const QString& employeeId) {
             qDebug() << "Request failed:" << reply->errorString();
         }
 
-        // ÊÍ·Å×ÊÔ´
+        // ï¿½Í·ï¿½ï¿½ï¿½Ô´
         reply->deleteLater();
 
         });
