@@ -4,8 +4,6 @@
 showOne::showOne(QWidget *parent)
 	: QMainWindow(parent)
 {
-
-
   
     setWindowFlags(Qt::FramelessWindowHint); // 设置无边框
     // 添加菜单项
@@ -13,10 +11,50 @@ showOne::showOne(QWidget *parent)
     m_contextMenu.addAction("最大化", this, &showOne::maximize);
     m_contextMenu.addAction("退出", this, &showOne::closeWindow);
 	ui.setupUi(this);
+    connect(ui.pushButton, &QPushButton::clicked, this, &showOne::One);
+
+  
 }
 
 showOne::~showOne()
 {}
+
+void showOne::switchPages()
+{
+    
+
+   
+}
+
+
+
+
+void showOne::One()
+{
+    qDebug() << "showOne::One()";
+   // showOne show;
+    this->hide();
+    //this->show();
+    Qtclient hand;
+    hand.showHandle();
+    /*
+    showOne show;
+    //stackedWidget->setCurrentWidget(aWidget);
+    show.hide();
+
+    qDebug() << "showOne::One()";*/
+    // 5秒后切回A界面
+    QTimer::singleShot(5000, this, &showOne::One);
+}
+
+void showOne::Handle()
+{
+    Qtclient hand;
+    hand.hide();
+}
+
+
+
 
 
 void showOne::mousePressEvent(QMouseEvent* event)
@@ -44,8 +82,7 @@ void showOne::showInfo()
 {
     QFont font("Arial", 40, QFont::Bold);
     ui.label_3->setFont(font);
-    //ui.label->setAlignment(Qt::AlignCenter);
-   // ui.label->setGeometry(50, 50, 200, 50); // 设置文本标签的位置和大小
+   
    ui.label->setText( "欢迎");
    ui.label_2->setText("晴天 20度");
    ui.label_3->setText("时间");
@@ -62,8 +99,6 @@ void showOne::showInfo()
         QDateTime currentTime = QDateTime::currentDateTime();
         ui.label_3->setText(currentTime.toString("hh:mm:ss"));
 
-
-
         ui.label_4->setText(currentTime.toString("yyyy-MM-dd hh:mm:ss"));
         // 更新农历日期，你需要自己实现一个转换函数或者使用第三方库
         // lunarDateLabel->setText(convertToLunar(currentTime));
@@ -73,6 +108,11 @@ void showOne::showInfo()
 
     timer.start(1000); // 每秒更新一次
 }
+
+
+
+
+
 
 void showOne::minimize()
 {

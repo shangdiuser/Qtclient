@@ -19,7 +19,10 @@ Qtclient::Qtclient(QWidget *parent)
 Qtclient::~Qtclient()
 {}
 
-
+void Qtclient::showHandle()
+{
+    this->show();
+}
 
 
 
@@ -117,6 +120,8 @@ void Qtclient::contextMenuEvent(QContextMenuEvent* event)
 {
     m_contextMenu.exec(event->globalPos());
 }
+
+
 
 void Qtclient::minimize()
 {

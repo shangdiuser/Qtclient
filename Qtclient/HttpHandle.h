@@ -20,6 +20,7 @@ public:
     QByteArray Clock(const QString& employeeId);
     void ClokInfoShow( QJsonObject jsonData);
 
+    
 signals:
 //explicit HttpHandle(QObject *parent=nullptr);
  void signalMusic( QStringList musicList);

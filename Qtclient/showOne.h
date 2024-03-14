@@ -5,6 +5,8 @@
 #include <QDateTime>
 #include <QMouseEvent>
 #include<QTimer>
+#include"HttpHandle.h"
+#include"Qtclient.h"
 class showOne : public QMainWindow
 {
 	Q_OBJECT
@@ -21,11 +23,16 @@ public:
 	void mouseMoveEvent(QMouseEvent* event) override;
 	void contextMenuEvent(QContextMenuEvent* event) override;
 	void showInfo();
+	void switchPages();
 
+	void One();
+	void Handle();
 private:
 	Ui::showOneClass ui;
 
 	QPoint m_dragPosition;
 	QMenu m_contextMenu;
 	QTimer timer;
+//	Qtclient *hand;
+
 };

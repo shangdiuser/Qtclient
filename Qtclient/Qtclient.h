@@ -34,7 +34,7 @@ public:
     void mousePressEvent(QMouseEvent* event) override;
     void mouseMoveEvent(QMouseEvent* event) override;
     void contextMenuEvent(QContextMenuEvent* event) override;
-
+    void showHandle();
 private:
     Ui::QtclientClass ui;
     QNetworkAccessManager* manager;

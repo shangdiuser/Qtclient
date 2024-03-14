@@ -12,12 +12,9 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-
-  
-   
-   
-    Qtclient w;
-    w.show();
+ 
+   // Qtclient w;
+  //  w.show();
 
     showOne s;
     s.showInfo();

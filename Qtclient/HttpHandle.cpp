@@ -99,10 +99,8 @@ void HttpHandle::ClokInfoShow(QJsonObject jsonData)
     
   
 
-    
-
-
 }
+
 
 //打卡
 QByteArray HttpHandle::Clock(const QString& employeeId)
