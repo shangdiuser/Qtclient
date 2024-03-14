@@ -1,9 +1,15 @@
 #include "Qtclient.h"
 
+
+
 Qtclient::Qtclient(QWidget *parent)
     : QMainWindow(parent)
 {
-   
+    setWindowFlags(Qt::FramelessWindowHint); // 设置无边框
+    // 添加菜单项
+    m_contextMenu.addAction("最小化", this, &Qtclient::minimize);
+    m_contextMenu.addAction("最大化", this, &Qtclient::maximize);
+    m_contextMenu.addAction("退出", this, &Qtclient::closeWindow);
     ui.setupUi(this);
 
     connect(ui.onPunchCardButtonClicked, &QPushButton::clicked, this, &Qtclient::onPunchCardButtonClicked);
@@ -12,6 +18,10 @@ Qtclient::Qtclient(QWidget *parent)
 
 Qtclient::~Qtclient()
 {}
+
+
+
+
 
 // ĳ���򿨰�ť�ĵ���ۺ���
 void Qtclient::onPunchCardButtonClicked() {
@@ -59,6 +69,7 @@ void Qtclient::onPunchCardButtonClicked() {
    }
 }
 
+
 void Qtclient::onPunchCardRequested(const QString& employeeId) {
    
     // ���� JSON ����
@@ -83,48 +94,44 @@ void Qtclient::onPunchCardRequested(const QString& employeeId) {
    // requestTool tool;
    // tool.sendRequest(url, jsonData);
 
-    /*
-    // ������������
-    QNetworkAccessManager manager;
-    QNetworkRequest request(QUrl("http://localhost:8080/Clock"));
-    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
-
-    // ���� POST ����
-    QNetworkReply* reply = manager.post(request, jsonData);
-
-    qDebug() << reply << "���� POST ����";
+}
 
 
-  
-
-    // �鿴�����ַ
-    QUrl requestUrl = request.url();
-    qDebug() << "Request URL:" << requestUrl.toString();
-
-    // �鿴����ͷ
-    QList<QByteArray> requestHeaders = request.rawHeaderList();
-    qDebug() << "Request Headers:";
-    for (const QByteArray& header : requestHeaders) {
-        qDebug() << header << ":" << request.rawHeader(header);
+void Qtclient::mousePressEvent(QMouseEvent* event)
+{
+    if (event->button() == Qt::LeftButton) {
+        m_dragPosition = event->globalPos() - frameGeometry().topLeft();
+        event->accept();
     }
+}
 
-    // �鿴������
-    qDebug() << "Request Body:" << jsonData;
+void Qtclient::mouseMoveEvent(QMouseEvent* event)
+{
+    if (event->buttons() & Qt::LeftButton) {
+        move(event->globalPos() - m_dragPosition);
+        event->accept();
+    }
+}
 
-    // ������Ӧ
-    QObject::connect(reply, &QNetworkReply::finished, [&]() {
-        if (reply->error() == QNetworkReply::NoError) {
-            QByteArray responseData = reply->readAll();
-            qDebug() << "Response:" << responseData;
-        }
-        else {
-            qDebug() << "Request failed:" << reply->errorString();
-        }
+void Qtclient::contextMenuEvent(QContextMenuEvent* event)
+{
+    m_contextMenu.exec(event->globalPos());
+}
 
-        // �ͷ���Դ
-        reply->deleteLater();
+void Qtclient::minimize()
+{
+    this->showMinimized();
+}
 
-        });
+void Qtclient::maximize()
+{
+    if (this->isMaximized())
+        this->showNormal();
+    else
+        this->showMaximized();
+}
 
-        */
+void Qtclient::closeWindow()
+{
+    this->close();
 }

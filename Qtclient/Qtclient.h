@@ -13,25 +13,33 @@
 #include <QJsonObject>
 #include <QDateTime>
 #include"HttpHandle.h"
+#include <QMouseEvent>
 class Qtclient : public QMainWindow
 {
     Q_OBJECT
-
+      
 signals:
     void punchCardRequested(const QString& employeeId);
 public slots:
     void onPunchCardRequested(const QString& employeeId);
-
+    void minimize();
+    void maximize();
+    void closeWindow();
 
 public:
     Qtclient(QWidget *parent = nullptr);
     ~Qtclient();
-
+   
     void onPunchCardButtonClicked();
- 
+    void mousePressEvent(QMouseEvent* event) override;
+    void mouseMoveEvent(QMouseEvent* event) override;
+    void contextMenuEvent(QContextMenuEvent* event) override;
 
 private:
     Ui::QtclientClass ui;
     QNetworkAccessManager* manager;
     QNetworkReply* reply;
+    
+    QPoint m_dragPosition;
+    QMenu m_contextMenu;
 };
