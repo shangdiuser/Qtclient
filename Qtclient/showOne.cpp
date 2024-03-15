@@ -33,7 +33,7 @@ void showOne::switchPages()
 
     two->show(); // 显示 showTwo 窗口
     // 2秒后切回 showOne 窗口
-    QTimer::singleShot(2000, [=]() {
+    QTimer::singleShot(4000, [=]() {
         two->hide();
         this->show();
         });

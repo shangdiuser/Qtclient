@@ -19,7 +19,33 @@
   </property>
   <widget class="QWidget" name="centralWidget">
    <property name="styleSheet">
-    <string notr="true"/>
+    <string notr="true">QPushButton:hover {
+    background-color: yellow;
+}
+
+QPushButton:pressed {
+    background-color: red;
+}
+
+QPushButton:hover:pressed {
+    background-color: blue;
+}
+
+
+#pushButton{
+
+ color: white;
+}
+
+QLabel{
+color: black;
+}
+
+line{
+background-color: transparent; 
+border: none;
+}
+</string>
    </property>
    <widget class="QLabel" name="label">
     <property name="geometry">
@@ -167,11 +193,7 @@
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">#pushButton{
-background-color: transparent; 
-border: none;
- color: white;
-}</string>
+     <string notr="true"/>
     </property>
     <property name="text">
      <string>打卡测试</string>

@@ -28,6 +28,13 @@ void Qtclient::showClient(const QString& employeeId)
     ui.label_4->setAttribute(Qt::WA_TranslucentBackground);
     ui.label_5->setAttribute(Qt::WA_TranslucentBackground);
     ui.label_6->setAttribute(Qt::WA_TranslucentBackground);
+    ui.textEdit->setAttribute(Qt::WA_TranslucentBackground);
+    ui.textEdit_2->setAttribute(Qt::WA_TranslucentBackground);
+    ui.textEdit_3->setAttribute(Qt::WA_TranslucentBackground);
+    ui.textEdit_4->setAttribute(Qt::WA_TranslucentBackground);
+    ui.textEdit_5->setAttribute(Qt::WA_TranslucentBackground);
+    ui.textEdit_6->setAttribute(Qt::WA_TranslucentBackground);
+   // ui.textEdit_2->setAttribute(Qt::WA_TranslucentBackground);
 
     QByteArray buf = handle.Clock(employeeId);
 
@@ -44,14 +51,20 @@ void Qtclient::showClient(const QString& employeeId)
         if (error.error == QJsonParseError::NoError && jsonDoc.isObject()) {
             QJsonObject jsonObj = jsonDoc.object();
             QString punch_in_time = jsonObj["punch_in_time"].toString();
-            qDebug() << "punch_in_time:" << punch_in_time;
+            //qDebug() << "punch_in_time:" << punch_in_time;
+            // 将ISO 8601格式的时间转换为QDateTime对象
+            QDateTime dateTime = QDateTime::fromString(punch_in_time, Qt::ISODate);
 
-            ui.textEdit_6->setText(jsonObj["punch_in_time"].toString());
+            // 将QDateTime对象格式化为指定格式的字符串
+            QString formattedDateTime = dateTime.toString("yyyy-MM-dd HH:mm:ss");
+
+
+            ui.textEdit_6->setText(formattedDateTime);
 
 
             ui.textEdit_5->setText(jsonObj["is_late"].toString());
             ui.textEdit_4->setText(jsonObj["employee_id"].toString());
-
+            ui.textEdit_3->setText("测试工程师");
             // jsonObject["name"] = query.value("name").toString(); // ���Ա������
             // jsonObject["department"] = query.value("department").toString(); // ��Ӳ�����Ϣ
             ui.textEdit->setText(jsonObj["name"].toString());
@@ -92,13 +105,21 @@ void Qtclient::onPunchCardButtonClicked() {
        if (error.error == QJsonParseError::NoError && jsonDoc.isObject()) {
            QJsonObject jsonObj = jsonDoc.object();
            QString punch_in_time = jsonObj["punch_in_time"].toString();
-           qDebug() << "punch_in_time:" << punch_in_time;
+        
+           //qDebug() << "punch_in_time:" << punch_in_time;
+           // 将ISO 8601格式的时间转换为QDateTime对象
+           QDateTime dateTime = QDateTime::fromString(punch_in_time, Qt::ISODate);
 
-           ui.textEdit_6->setText(jsonObj["punch_in_time"].toString());
-         
-         
-               ui.textEdit_5->setText(jsonObj["is_late"].toString());
-               ui.textEdit_4->setText(jsonObj["employee_id"].toString());
+           // 将QDateTime对象格式化为指定格式的字符串
+           QString formattedDateTime = dateTime.toString("yyyy-MM-dd HH:mm:ss");
+
+
+           ui.textEdit_6->setText(formattedDateTime);
+
+
+           ui.textEdit_5->setText(jsonObj["is_late"].toString());
+           ui.textEdit_4->setText(jsonObj["employee_id"].toString());
+           ui.textEdit_3->setText("测试工程师");
           // jsonObject["name"] = query.value("name").toString(); // ���Ա������
           // jsonObject["department"] = query.value("department").toString(); // ��Ӳ�����Ϣ
            ui.textEdit->setText(jsonObj["name"].toString());
