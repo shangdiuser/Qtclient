@@ -90,6 +90,7 @@
     <ClCompile Include="HttpHandle.cpp" />
     <ClCompile Include="showOne.cpp" />
     <QtRcc Include="Qtclient.qrc" />
+    <QtRcc Include="Resource.qrc" />
     <QtUic Include="Qtclient.ui" />
     <QtMoc Include="Qtclient.h" />
     <ClCompile Include="Qtclient.cpp" />

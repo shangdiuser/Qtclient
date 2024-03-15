@@ -11,7 +11,7 @@ showOne::showOne(QWidget *parent)
     m_contextMenu.addAction("最大化", this, &showOne::maximize);
     m_contextMenu.addAction("退出", this, &showOne::closeWindow);
 	ui.setupUi(this);
-    connect(ui.pushButton, &QPushButton::clicked, this, &showOne::One);
+    connect(ui.pushButton, &QPushButton::clicked, this, &showOne::switchPages);
 
   
 }
@@ -22,38 +22,23 @@ showOne::~showOne()
 void showOne::switchPages()
 {
     
+    this->hide(); // 隐藏当前窗口
 
    
+
+    Qtclient* two = new Qtclient(); // 创建 showTwo 窗口的实例
+
+    two->showClient(ui.lineEdit->text());
+
+
+    two->show(); // 显示 showTwo 窗口
+    // 2秒后切回 showOne 窗口
+    QTimer::singleShot(2000, [=]() {
+        two->hide();
+        this->show();
+        });
+   
 }
-
-
-
-
-void showOne::One()
-{
-    qDebug() << "showOne::One()";
-   // showOne show;
-    this->hide();
-    //this->show();
-    Qtclient hand;
-    hand.showHandle();
-    /*
-    showOne show;
-    //stackedWidget->setCurrentWidget(aWidget);
-    show.hide();
-
-    qDebug() << "showOne::One()";*/
-    // 5秒后切回A界面
-    QTimer::singleShot(5000, this, &showOne::One);
-}
-
-void showOne::Handle()
-{
-    Qtclient hand;
-    hand.hide();
-}
-
-
 
 
 
@@ -80,15 +65,26 @@ void showOne::contextMenuEvent(QContextMenuEvent* event)
 
 void showOne::showInfo()
 {
-    QFont font("Arial", 40, QFont::Bold);
+    QFont font("Arial", 44, QFont::Bold);
     ui.label_3->setFont(font);
-   
+    ui.label->setAttribute(Qt::WA_TranslucentBackground);
+    ui.label_2->setAttribute(Qt::WA_TranslucentBackground);
+    ui.label_3->setAttribute(Qt::WA_TranslucentBackground);
+    ui.label_4->setAttribute(Qt::WA_TranslucentBackground);
+    ui.label_5->setAttribute(Qt::WA_TranslucentBackground);
+    ui.label_6->setAttribute(Qt::WA_TranslucentBackground);
    ui.label->setText( "欢迎");
+   ui.label->setStyleSheet("QLabel { background-color: transparent; border: none;  }");
    ui.label_2->setText("晴天 20度");
+   ui.label_2->setStyleSheet("QLabel { background-color: transparent; border: none;  }");
    ui.label_3->setText("时间");
+   ui.label_3->setStyleSheet("QLabel { background-color: transparent; border: none; }");
    ui.label_4->setText("时间");
+   ui.label_4->setStyleSheet("QLabel { background-color: transparent; border: none; }");
    ui.label_5->setText("星期几");
- 
+   ui.label_5->setStyleSheet("QLabel { background-color: transparent; border: none;}");
+  // ui.label->setStyleSheet("QLabel { background-color: transparent; }");
+   ui.label_6->setStyleSheet("QLabel { background-color: transparent; border: none;}");
 
     // 更新实时时间和日期
    

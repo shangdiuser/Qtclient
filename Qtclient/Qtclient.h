@@ -34,7 +34,8 @@ public:
     void mousePressEvent(QMouseEvent* event) override;
     void mouseMoveEvent(QMouseEvent* event) override;
     void contextMenuEvent(QContextMenuEvent* event) override;
-    void showHandle();
+    void showClient(const QString& employeeId);
+
 private:
     Ui::QtclientClass ui;
     QNetworkAccessManager* manager;
@@ -42,4 +43,5 @@ private:
     
     QPoint m_dragPosition;
     QMenu m_contextMenu;
+    HttpHandle handle;
 };

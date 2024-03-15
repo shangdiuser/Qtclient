@@ -25,14 +25,13 @@ public:
 	void showInfo();
 	void switchPages();
 
-	void One();
-	void Handle();
+	
 private:
 	Ui::showOneClass ui;
 
 	QPoint m_dragPosition;
 	QMenu m_contextMenu;
 	QTimer timer;
-//	Qtclient *hand;
+	//Qtclient hand;
 
 };

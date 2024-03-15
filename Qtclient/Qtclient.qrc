@@ -1,4 +1,6 @@
 <RCC>
-    <qresource prefix="Qtclient">
-    </qresource>
+  <qresource prefix="Qtclient"/>
+  <qresource prefix="/">
+    <file>img/back.jpeg</file>
+  </qresource>
 </RCC>
