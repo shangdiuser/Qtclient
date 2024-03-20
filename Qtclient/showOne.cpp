@@ -99,7 +99,7 @@ void showOne::showInfo()
         // 更新农历日期，你需要自己实现一个转换函数或者使用第三方库
         // lunarDateLabel->setText(convertToLunar(currentTime));
         ui.label_5->setText(locale.toString(QDate::currentDate(), "dddd"));
-        qDebug() << currentTime.toString("yyyy-MM-dd dddd");
+       // qDebug() << currentTime.toString("yyyy-MM-dd dddd");
         });
 
     timer.start(1000); // 每秒更新一次

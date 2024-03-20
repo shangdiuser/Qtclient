@@ -1,5 +1,6 @@
 #include "Qtclient.h"
 #include "showOne.h"
+#include "showData.h"
 #include <QtWidgets/QApplication>
 #include <QNetworkAccessManager>
 #include <QNetworkRequest>
@@ -15,10 +16,13 @@ int main(int argc, char *argv[])
  
    // Qtclient w;
   //  w.show();
-
-    showOne s;
-    s.showInfo();
-    s.show();
+    showData data;
+    data.show();
+    data.initiShow();
+   
+  // showOne s;
+  // s.showInfo();
+  //  s.show();
 
 
   

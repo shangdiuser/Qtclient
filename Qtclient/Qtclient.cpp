@@ -64,7 +64,7 @@ void Qtclient::showClient(const QString& employeeId)
 
             ui.textEdit_5->setText(jsonObj["is_late"].toString());
             ui.textEdit_4->setText(jsonObj["employee_id"].toString());
-            ui.textEdit_3->setText("测试工程师");
+            ui.textEdit_3->setText(jsonObj["position"].toString());
             // jsonObject["name"] = query.value("name").toString(); // ���Ա������
             // jsonObject["department"] = query.value("department").toString(); // ��Ӳ�����Ϣ
             ui.textEdit->setText(jsonObj["name"].toString());
@@ -78,6 +78,7 @@ void Qtclient::showClient(const QString& employeeId)
     }
     else {
         qDebug() << "Invalid JSON data in the reply";
+        ui.textEdit_5->setText("打卡失败！！");
     }
 }
 
@@ -119,7 +120,7 @@ void Qtclient::onPunchCardButtonClicked() {
 
            ui.textEdit_5->setText(jsonObj["is_late"].toString());
            ui.textEdit_4->setText(jsonObj["employee_id"].toString());
-           ui.textEdit_3->setText("测试工程师");
+           ui.textEdit_3->setText(jsonObj["position"].toString());
           // jsonObject["name"] = query.value("name").toString(); // ���Ա������
           // jsonObject["department"] = query.value("department").toString(); // ��Ӳ�����Ϣ
            ui.textEdit->setText(jsonObj["name"].toString());

@@ -49,16 +49,17 @@
     <ClCompile Include="showOne.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="showData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="Qtclient.rc">
-      <Filter>Resource Files</Filter>
-    </ResourceCompile>
+    <ClInclude Include="resource1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="HttpHandle.h">
@@ -67,13 +68,24 @@
     <QtMoc Include="showOne.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="showData.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="showOne.ui">
       <Filter>Form Files</Filter>
     </QtUic>
+    <QtUic Include="showData.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Qtclient1.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

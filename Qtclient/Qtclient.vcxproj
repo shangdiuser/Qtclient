@@ -88,6 +88,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="HttpHandle.cpp" />
+    <ClCompile Include="showData.cpp" />
     <ClCompile Include="showOne.cpp" />
     <QtRcc Include="Qtclient.qrc" />
     <QtRcc Include="Resource.qrc" />
@@ -95,18 +96,21 @@
     <QtMoc Include="Qtclient.h" />
     <ClCompile Include="Qtclient.cpp" />
     <ClCompile Include="main.cpp" />
+    <QtUic Include="showData.ui" />
     <QtUic Include="showOne.ui" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="resource1.h" />
+    <QtMoc Include="showData.h" />
     <QtMoc Include="showOne.h" />
     <QtMoc Include="HttpHandle.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="Qtclient.rc" />
+    <None Include="cpp.hint" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="cpp.hint" />
+    <ResourceCompile Include="Qtclient1.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
