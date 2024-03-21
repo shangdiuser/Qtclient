@@ -7,6 +7,7 @@
 #include <QStandardItemModel>
 #include <QStandardItem>
 #include <QMouseEvent>
+#include"HttpHandle.h"
 class showData : public QMainWindow
 {
 	Q_OBJECT
@@ -22,7 +23,7 @@ public:
 	void mousePressEvent(QMouseEvent* event) override;
 	void mouseMoveEvent(QMouseEvent* event) override;
 	void contextMenuEvent(QContextMenuEvent* event) override;
-	void initiShow();
+	void initiShow() ;
 
 private:
 	Ui::showDataClass ui;
@@ -30,4 +31,5 @@ private:
 	QMenu m_contextMenu;
 	//QStandardItemModel* m_pModel;  //数据模型对象指针
 	//showData* initishow;
+	HttpHandle handle;
 };

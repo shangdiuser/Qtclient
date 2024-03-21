@@ -5,6 +5,7 @@
 #include <QNetworkAccessManager>
 #include <QNetworkRequest>
 #include <QNetworkReply>
+#include <QUrlQuery>
 
 class HttpHandle : public QObject
 {
@@ -19,6 +20,7 @@ public:
 
     QByteArray Clock(const QString& employeeId);
     void ClokInfoShow( QJsonObject jsonData);
+    QByteArray allInfo(QString id, QString name);
 
     
 signals:

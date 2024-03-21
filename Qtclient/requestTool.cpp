@@ -3,36 +3,36 @@
 
 requestTool::requestTool(QObject* parent)
 {
-    // ´´½¨Á¬½Ó¹ÜÀíÆ÷
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¹ï¿½ï¿½ï¿½ï¿½ï¿½
      // networkManager = new QNetworkAccessManager(this);
 }
 
-// ÔÚÐèÒª·¢ËÍÇëÇóµÄµØ·½£¬Ê¹ÓÃÁ¬½Ó¹ÜÀíÆ÷·¢ËÍÇëÇó
+// ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÄµØ·ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½ï¿½ï¿½ï¿½Ó¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
  void requestTool::sendRequest(const QUrl& url, const QByteArray& data) {
   /*
-    // ´´½¨ÍøÂçÇëÇó
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     QNetworkRequest request(url);
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
 
-    // ·¢ËÍ POST ÇëÇó
+    // ï¿½ï¿½ï¿½ï¿½ POST ï¿½ï¿½ï¿½ï¿½
     QNetworkReply* reply = networkManager->post(request, data);
 
-    // ²é¿´ÇëÇóµØÖ·
+    // ï¿½é¿´ï¿½ï¿½ï¿½ï¿½ï¿½Ö·
     QUrl requestUrl = request.url();
     qDebug() << "Request URL:" << requestUrl.toString();
 
-    // ²é¿´ÇëÇóÍ·
+    // ï¿½é¿´ï¿½ï¿½ï¿½ï¿½Í·
     QList<QByteArray> requestHeaders = request.rawHeaderList();
     qDebug() << "Request Headers:";
     for (const QByteArray& header : requestHeaders) {
         qDebug() << header << ":" << request.rawHeader(header);
     }
 
-    // ²é¿´ÇëÇóÌå
+    // ï¿½é¿´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     qDebug() << "Request Body:" << data;
 
 
-    // ´¦ÀíÏìÓ¦
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦
     QObject::connect(reply, &QNetworkReply::finished, [&]() {
         if (reply->error() == QNetworkReply::NoError) {
             QByteArray responseData = reply->readAll();
@@ -42,7 +42,7 @@ requestTool::requestTool(QObject* parent)
             qDebug() << "Request failed:" << reply->errorString();
         }
 
-        // ÊÍ·Å×ÊÔ´
+        // ï¿½Í·ï¿½ï¿½ï¿½Ô´
         reply->deleteLater();
 
         });*/

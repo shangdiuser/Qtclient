@@ -11,7 +11,7 @@ showData::showData(QWidget *parent)
     m_contextMenu.addAction("最大化", this, &showData::maximize);
     m_contextMenu.addAction("退出", this, &showData::closeWindow);
     ui.setupUi(this);
-    
+   // connect(ui.pushButton, &QPushButton::clicked, this, &showData::initiShow);
 
 }
 
@@ -20,6 +20,19 @@ showData::~showData()
 
 void showData::initiShow()
 {
+    QString id = ui.lineEdit_2->text();
+    QString name = ui.lineEdit->text();
+   QByteArray buf = handle.allInfo("1002", "张三");
+  /*  // 解析JSON数据
+    QJsonArray parsedArray = QJsonDocument::fromJson(buf.toUtf8()).array();
+    foreach(const QJsonValue & value, parsedArray) {
+        QJsonObject obj = value.toObject();
+        qDebug() << "ID:" << obj["id"].toInt()
+            << "Name:" << obj["name"].toString()
+            << "Age:" << obj["age"].toInt();
+    }*/
+   // qDebug() << buf;
+
     ui.tableView->setStyleSheet("selection-background-color:skyblue; selection-color: white;QTableView QCornerHeader::section { background-color: skyblue; }"); //设置tableWidget QSS样式表，背景为红色，字体为白色
     //ui.tableView->hideColumn(0);	//隐藏第一列
     ui.tableView->setEditTriggers(QAbstractItemView::NoEditTriggers); //设置不可编辑

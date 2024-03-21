@@ -101,6 +101,35 @@ void HttpHandle::ClokInfoShow(QJsonObject jsonData)
 
 }
 
+QByteArray HttpHandle::allInfo(QString id, QString name)
+{
+    QByteArray buf = nullptr;
+    QUrl url("http://localhost:8080/allInof"); // 更改为你的服务器地址
+    QUrlQuery query;
+    query.addQueryItem("id", id);
+    query.addQueryItem("name", name);
+    url.setQuery(query);
+
+   // QNetworkAccessManager manager;
+    QNetworkRequest request;
+    request.setUrl(QUrl(url));
+     reply = manager->get(request);
+
+    QObject::connect(reply, &QNetworkReply::finished, [&]() {
+        if (reply->error() == QNetworkReply::NoError) {
+            qDebug() << "Request successful";
+            qDebug() << "Response:" << reply->readAll();
+        }
+        else {
+            qDebug() << "Error:" << reply->errorString();
+        }
+         buf = reply->readAll();
+        qDebug() << "reoly" << buf;
+        });
+
+    return buf;
+}
+
 
 //打卡
 QByteArray HttpHandle::Clock(const QString& employeeId)
