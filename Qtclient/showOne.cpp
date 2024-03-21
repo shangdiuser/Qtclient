@@ -26,7 +26,7 @@ void showOne::switchPages()
 
    
 
-    Qtclient* two = new Qtclient(); // 创建 showTwo 窗口的实例
+    Qtclient* two = new Qtclient(); //  创建 showTwo 窗口的实例
 
     two->showClient(ui.lineEdit->text());
 
