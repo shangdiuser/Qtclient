@@ -18,6 +18,8 @@ public:
     QString getMusicUrl(QString artist,QString name);
     QString getMusicLyric(QString artist,QString name);
 
+   
+
     QByteArray Clock(const QString& employeeId);
     void ClokInfoShow( QJsonObject jsonData);
     QByteArray allInfo(QString id, QString name);

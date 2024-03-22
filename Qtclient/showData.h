@@ -8,6 +8,12 @@
 #include <QStandardItem>
 #include <QMouseEvent>
 #include"HttpHandle.h"
+
+#include <QJsonDocument>
+#include <QJsonArray>
+#include <QJsonObject>
+#include <QDebug>
+
 class showData : public QMainWindow
 {
 	Q_OBJECT

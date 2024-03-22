@@ -103,32 +103,27 @@ void HttpHandle::ClokInfoShow(QJsonObject jsonData)
 
 QByteArray HttpHandle::allInfo(QString id, QString name)
 {
-    QByteArray buf = nullptr;
-    QUrl url("http://localhost:8080/allInof"); // 更改为你的服务器地址
-    QUrlQuery query;
-    query.addQueryItem("id", id);
-    query.addQueryItem("name", name);
-    url.setQuery(query);
-
-   // QNetworkAccessManager manager;
+   // QString urlInt = search;
+    QString urlInt =QString("http://localhost:8080/allInof");
+   // QString urlInt =QString("http://localhost/F%3A/%E4%B8%8B%E8%BD%BD/%E9%9F%B3%E4%B9%90/%E9%9F%B3%E4%B9%90");
+    QString url = urlInt;
     QNetworkRequest request;
-    request.setUrl(QUrl(url));
-     reply = manager->get(request);
 
-    QObject::connect(reply, &QNetworkReply::finished, [&]() {
-        if (reply->error() == QNetworkReply::NoError) {
-            qDebug() << "Request successful";
-            qDebug() << "Response:" << reply->readAll();
-        }
-        else {
-            qDebug() << "Error:" << reply->errorString();
-        }
-         buf = reply->readAll();
-        qDebug() << "reoly" << buf;
-        });
+    request.setUrl(QUrl(url));
+    reply = manager->get(request);
+    QEventLoop event;
+
+    connect(reply, &QNetworkReply::finished, &event, &QEventLoop::quit);
+    event.exec(QEventLoop::ExcludeUserInputEvents);
+
+    QByteArray buf = reply->readAll();
+    qDebug() << "reoly" << buf;
 
     return buf;
 }
+
+
+
 
 
 //打卡
