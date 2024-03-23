@@ -7,6 +7,7 @@
 #include<QTimer>
 #include"HttpHandle.h"
 #include"Qtclient.h"
+#include "showData.h"
 class showOne : public QMainWindow
 {
 	Q_OBJECT
@@ -24,7 +25,7 @@ public:
 	void contextMenuEvent(QContextMenuEvent* event) override;
 	void showInfo();
 	void switchPages();
-
+	void openQueryDialog();
 	
 private:
 	Ui::showOneClass ui;

@@ -23,7 +23,7 @@ public:
     QByteArray Clock(const QString& employeeId);
     void ClokInfoShow( QJsonObject jsonData);
     QByteArray allInfo(QString id, QString name);
-
+   
     
 signals:
 //explicit HttpHandle(QObject *parent=nullptr);

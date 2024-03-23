@@ -8,6 +8,7 @@
 #include <QStandardItem>
 #include <QMouseEvent>
 #include"HttpHandle.h"
+#include"showOne.h"
 
 #include <QJsonDocument>
 #include <QJsonArray>
@@ -30,6 +31,7 @@ public:
 	void mouseMoveEvent(QMouseEvent* event) override;
 	void contextMenuEvent(QContextMenuEvent* event) override;
 	void initiShow() ;
+	void switchWindows();
 
 private:
 	Ui::showDataClass ui;

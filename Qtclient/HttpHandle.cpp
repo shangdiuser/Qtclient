@@ -103,6 +103,42 @@ void HttpHandle::ClokInfoShow(QJsonObject jsonData)
 
 QByteArray HttpHandle::allInfo(QString id, QString name)
 {
+    QString urlInt = QString("http://localhost:8080/allInof");
+    QString url = urlInt;
+
+    // Adjust URL based on id and name
+    if (!id.isEmpty() && !name.isEmpty()) {
+        // If both id and name are not empty, pass both as parameters
+        url += "?id=" + id + "&name=" + name;
+    }
+    else if (!id.isEmpty()) {
+        // If only id is not empty, pass only id as parameter
+        url += "?id=" + id;
+    }
+    else if (!name.isEmpty()) {
+        // If only name is not empty, pass only name as parameter
+        url += "?name=" + name;
+    }
+
+    QNetworkRequest request;
+    request.setUrl(QUrl(url));
+    reply = manager->get(request);
+
+    QEventLoop event;
+    connect(reply, &QNetworkReply::finished, &event, &QEventLoop::quit);
+    event.exec(QEventLoop::ExcludeUserInputEvents);
+
+    QByteArray buf = reply->readAll();
+    qDebug() << "reply" << buf;
+
+    return buf;
+}
+
+
+
+/*
+QByteArray HttpHandle::allInfo(QString id, QString name)
+{
    // QString urlInt = search;
     QString urlInt =QString("http://localhost:8080/allInof");
    // QString urlInt =QString("http://localhost/F%3A/%E4%B8%8B%E8%BD%BD/%E9%9F%B3%E4%B9%90/%E9%9F%B3%E4%B9%90");
@@ -121,7 +157,7 @@ QByteArray HttpHandle::allInfo(QString id, QString name)
 
     return buf;
 }
-
+*/
 
 
 

@@ -11,18 +11,28 @@ showData::showData(QWidget *parent)
     m_contextMenu.addAction("最大化", this, &showData::maximize);
     m_contextMenu.addAction("退出", this, &showData::closeWindow);
     ui.setupUi(this);
-   // connect(ui.pushButton, &QPushButton::clicked, this, &showData::initiShow);
-
+   connect(ui.pushButton, &QPushButton::clicked, this, &showData::initiShow);
+   connect(ui.pushButton_2, &QPushButton::clicked, this, &showData::switchWindows);
 }
 
 showData::~showData()
 {}
 
+void showData::switchWindows()
+{
+   
+    showOne *showone = new showOne();
+    showone->showInfo();
+    showone->show();
+    this->close();
+}
+
+
 void showData::initiShow()
 {
     QString id = ui.lineEdit_2->text();
     QString name = ui.lineEdit->text();
-   QByteArray buf = handle.allInfo("1001", "张三");
+   QByteArray buf = handle.allInfo(id, name);
 
    QJsonParseError parseError;
    QJsonDocument jsonDoc = QJsonDocument::fromJson(buf, &parseError);
@@ -107,6 +117,8 @@ void showData::initiShow()
        qDebug() << "JSON parse error:" << parseError.errorString();
    }
 }
+
+
 
 
 void showData::mousePressEvent(QMouseEvent* event)
