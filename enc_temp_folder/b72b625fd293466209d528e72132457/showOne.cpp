@@ -43,8 +43,8 @@ void showOne::switchPages()
 void showOne::openQueryDialog()
 {
     // Hide the main window
-    this->close();
-    //this->hide();
+    //this->close();
+    this->hide();
     showData* showdata = new showData();
     showdata->initiShow();
     showdata->show();

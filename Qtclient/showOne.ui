@@ -226,7 +226,19 @@ border: none;
      <height>22</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>菜单</string>
+    </property>
+    <addaction name="actionchaxun"/>
+   </widget>
+   <addaction name="menu"/>
   </widget>
+  <action name="actionchaxun">
+   <property name="text">
+    <string>记录查询</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources>
