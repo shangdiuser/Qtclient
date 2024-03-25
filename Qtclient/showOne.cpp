@@ -13,11 +13,201 @@ showOne::showOne(QWidget *parent)
 	ui.setupUi(this);
     connect(ui.pushButton, &QPushButton::clicked, this, &showOne::switchPages);
     connect(ui.actionchaxun, &QAction::triggered, this, &showOne::openQueryDialog);
+    connect(ui.actiondaochu, &QAction::triggered, this, &showOne::dowExcel);
   
 }
 
 showOne::~showOne()
 {}
+
+void showOne::dowExcel()
+{
+    QByteArray jsonData = handle.allInfo("", "");
+
+    // 解析 JSON 数据
+    QJsonParseError jsonError;
+    QJsonDocument doc = QJsonDocument::fromJson(jsonData, &jsonError);
+
+    if (jsonError.error != QJsonParseError::NoError) {
+        qDebug() << "Error parsing JSON: " << jsonError.errorString();
+        return ;
+    }
+
+    if (!doc.isArray()) {
+        qDebug() << "JSON data is not an array.";
+        return ;
+    }
+
+    // 准备数据
+    QStringList headers = { "员工编号", "姓名", "职位", "部门", "上班时间", "是否迟到" };
+    QList<QStringList> data;
+
+    QJsonArray jsonArray = doc.array();
+    foreach(const QJsonValue & value, jsonArray) {
+        if (value.isObject()) {
+            QJsonObject obj = value.toObject();
+
+            QDateTime dateTime = QDateTime::fromString(obj["punch_in_time"].toString(), Qt::ISODate);
+            QString formattedDateTime = dateTime.toString("yyyy-MM-dd HH:mm:ss");
+
+            QStringList rowData = { obj["employee_id"].toString(), obj["name"].toString(),
+                                   obj["position"].toString(), obj["department"].toString(),
+                                   formattedDateTime, obj["late"].toString() };
+            data.append(rowData);
+        }
+    }
+
+     // 生成文件名（包含日期时间）
+    QString dateTimeString = QDateTime::currentDateTime().toString("yyyyMMdd_hhmmss");
+    QString filePath = QString("F:/share18/%1_data.csv").arg(dateTimeString);
+    // 保存Excel文件
+   // QString filePath = "F:\\share18\\" + formattedDateTime + "data.csv";
+    // 生成 CSV 文件
+    //QString filePath = "data.csv";
+    writeCSV(filePath, headers, data);
+
+
+
+}
+
+void showOne::writeCSV(const QString& filePath, const QStringList& headers, const QList<QStringList>& data)
+{
+    QFile file(filePath);
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+        qDebug() << "Failed to open file:" << filePath;
+        return;
+    }
+
+    QTextStream out(&file);
+
+    // 写入表头
+    for (const QString& header : headers) {
+        out << "\"" << header << "\",";
+    }
+    out << "\n";
+
+    // 写入数据
+    for (const QStringList& rowData : data) {
+        for (const QString& cellData : rowData) {
+            out << "\"" << cellData << "\",";
+        }
+        out << "\n";
+    }
+
+    file.close();
+    qDebug() << "CSV file saved to:" << filePath;
+}
+
+
+
+
+
+/*
+void showOne::dowExcel()
+{
+    QByteArray jsonData = handle.allInfo("", "");
+
+    // 解析JSON数据
+    QJsonParseError jsonError;
+    QJsonDocument doc = QJsonDocument::fromJson(jsonData, &jsonError);
+
+    if (jsonError.error != QJsonParseError::NoError) {
+        qDebug() << "Error parsing JSON: " << jsonError.errorString();
+        return ;
+    }
+
+    if (!doc.isArray()) {
+        qDebug() << "JSON data is not an array.";
+        return ;
+    }
+
+    // 创建一个新的Excel实例
+    QAxObject excel("Excel.Application");
+    if (excel.isNull()) {
+        qDebug() << "Failed to create Excel instance.";
+        return ;
+    }
+
+    excel.dynamicCall("SetVisible(bool)", false); // 隐藏Excel窗口
+
+    QAxObject* workbook = excel.querySubObject("Workbooks")->querySubObject("Add()");
+    if (!workbook) {
+        qDebug() << "Failed to create workbook.";
+        return ;
+    }
+
+    QAxObject* worksheet = workbook->querySubObject("Worksheets(int)", 1);
+    if (!worksheet) {
+        qDebug() << "Failed to get worksheet.";
+        return ;
+    }
+
+    // 设置表头
+    QStringList headers = { "员工编号", "姓名", "职位", "部门", "上班时间", "是否迟到" };
+    for (int col = 0; col < headers.size(); ++col) {
+        QAxObject* cell = worksheet->querySubObject("Cells(int, int)", 1, col + 1);
+        cell->setProperty("Value", headers[col]);
+        delete cell;
+    }
+
+    int row = 2; // 从第二行开始写入数据
+    QJsonArray jsonArray = doc.array();
+    foreach(const QJsonValue & value, jsonArray) {
+        if (value.isObject()) {
+            QJsonObject obj = value.toObject();
+            QDateTime dateTime = QDateTime::fromString(obj["punch_in_time"].toString(), Qt::ISODate);
+            QString formattedDateTime = dateTime.toString("yyyy-MM-dd HH:mm:ss");
+
+            QStringList rowData = { obj["employee_id"].toString(), obj["name"].toString(),
+                                   obj["position"].toString(), obj["department"].toString(),
+                                   formattedDateTime, obj["late"].toString() };
+
+            for (int col = 0; col < rowData.size(); ++col) {
+                QAxObject* cell = worksheet->querySubObject("Cells(int, int)", row, col + 1);
+                cell->setProperty("Value", rowData[col]);
+                delete cell;
+
+                qDebug() << row<< "员工编号:" << obj["employee_id"].toString()
+                    << "姓名:" << obj["name"].toString()
+                    << "职位:" << obj["position"].toString()
+                    << "部门:" << obj["department"].toString()
+                    << "上班时间:" << formattedDateTime
+                    << "是否迟到:" << obj["late"].toString();
+            
+            }
+            ++row;
+        }
+    }
+
+    // 获取当前日期和时间
+    QDateTime currentDateTime = QDateTime::currentDateTime();
+
+    // 格式化为字符串
+    QString formattedDateTime = currentDateTime.toString("yyyy-MM-ddHH:mm:ss");
+    // 保存Excel文件
+    QString filePath = "F:\\share18\\" + formattedDateTime+"data.xlsx";
+    qDebug()<<filePath;
+    QVariant result = workbook->dynamicCall("SaveAs(const QString&)", QDir::toNativeSeparators(filePath));
+  
+    // 检查返回的QVariant对象是否有效
+    if (result.isValid()) {
+        qDebug() << "SaveAs method executed successfully.";
+    }
+    else {
+        qDebug() << "Failed to execute SaveAs method.";
+    }
+
+    workbook->dynamicCall("Close()");
+    delete workbook;
+
+    excel.dynamicCall("Quit()");
+
+    // 弹出保存成功的提示
+    QMessageBox::information(nullptr, "提示", "数据已成功保存到Excel文件。");
+
+}
+
+*/
 
 void showOne::switchPages()
 {
@@ -51,6 +241,8 @@ void showOne::openQueryDialog()
 
    
 }
+
+
 
 
 

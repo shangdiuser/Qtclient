@@ -8,6 +8,13 @@
 #include"HttpHandle.h"
 #include"Qtclient.h"
 #include "showData.h"
+#include <QAxObject>
+#include <QVariant>
+#include <QStringList>
+#include <QDateTime>
+#include <QDir>
+#include <QMessageBox>
+#include<QObject>
 class showOne : public QMainWindow
 {
 	Q_OBJECT
@@ -26,7 +33,9 @@ public:
 	void showInfo();
 	void switchPages();
 	void openQueryDialog();
-	
+	void dowExcel();
+	void writeCSV(const QString& filePath, const QStringList& headers, const QList<QStringList>& data);
+
 private:
 	Ui::showOneClass ui;
 
@@ -34,5 +43,5 @@ private:
 	QMenu m_contextMenu;
 	QTimer timer;
 	//Qtclient hand;
-
+	HttpHandle handle;
 };

@@ -231,12 +231,18 @@ border: none;
      <string>菜单</string>
     </property>
     <addaction name="actionchaxun"/>
+    <addaction name="actiondaochu"/>
    </widget>
    <addaction name="menu"/>
   </widget>
   <action name="actionchaxun">
    <property name="text">
     <string>记录查询</string>
+   </property>
+  </action>
+  <action name="actiondaochu">
+   <property name="text">
+    <string>导出记录</string>
    </property>
   </action>
  </widget>
