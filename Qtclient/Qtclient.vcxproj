@@ -88,6 +88,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="HttpHandle.cpp" />
+    <ClCompile Include="SerialPortView.cpp" />
     <ClCompile Include="showData.cpp" />
     <ClCompile Include="showOne.cpp" />
     <QtRcc Include="Qtclient.qrc" />
@@ -96,11 +97,13 @@
     <QtMoc Include="Qtclient.h" />
     <ClCompile Include="Qtclient.cpp" />
     <ClCompile Include="main.cpp" />
+    <QtUic Include="SerialPortView.ui" />
     <QtUic Include="showData.ui" />
     <QtUic Include="showOne.ui" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource1.h" />
+    <QtMoc Include="SerialPortView.h" />
     <QtMoc Include="showData.h" />
     <QtMoc Include="showOne.h" />
     <QtMoc Include="HttpHandle.h" />

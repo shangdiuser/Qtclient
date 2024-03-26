@@ -52,6 +52,9 @@
     <ClCompile Include="showData.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SerialPortView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -71,12 +74,18 @@
     <QtMoc Include="showData.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="SerialPortView.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="showOne.ui">
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="showData.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="SerialPortView.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>
