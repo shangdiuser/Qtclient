@@ -1,6 +1,7 @@
 #include "Qtclient.h"
 #include "showOne.h"
 #include "showData.h"
+#include"SerialPortView.h"
 #include <QtWidgets/QApplication>
 #include <QNetworkAccessManager>
 #include <QNetworkRequest>
@@ -21,11 +22,13 @@ int main(int argc, char *argv[])
    // data.show();
    // data.initiShow();
    
-   showOne s;
+  /*
+    showOne s;
    s.showInfo();
     s.show();
-
-
+*/
+    SerialPortView s;
+    s.show();
   
 
     return a.exec();
