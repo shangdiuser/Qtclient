@@ -227,11 +227,17 @@ border: none;
     </rect>
    </property>
    <widget class="QMenu" name="menu">
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
     <property name="title">
      <string>菜单</string>
     </property>
     <addaction name="actionchaxun"/>
     <addaction name="actiondaochu"/>
+    <addaction name="actionkz"/>
    </widget>
    <addaction name="menu"/>
   </widget>
@@ -239,10 +245,20 @@ border: none;
    <property name="text">
     <string>记录查询</string>
    </property>
+   <property name="font">
+    <font>
+     <pointsize>9</pointsize>
+    </font>
+   </property>
   </action>
   <action name="actiondaochu">
    <property name="text">
     <string>导出记录</string>
+   </property>
+  </action>
+  <action name="actionkz">
+   <property name="text">
+    <string>控制器</string>
    </property>
   </action>
  </widget>

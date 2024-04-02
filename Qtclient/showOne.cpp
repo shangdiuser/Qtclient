@@ -14,6 +14,7 @@ showOne::showOne(QWidget *parent)
     connect(ui.pushButton, &QPushButton::clicked, this, &showOne::switchPages);
     connect(ui.actionchaxun, &QAction::triggered, this, &showOne::openQueryDialog);
     connect(ui.actiondaochu, &QAction::triggered, this, &showOne::dowExcel);
+    connect(ui.actionkz, &QAction::triggered, this, &showOne::openkz);
   
 }
 
@@ -96,6 +97,18 @@ void showOne::writeCSV(const QString& filePath, const QStringList& headers, cons
 
     file.close();
     qDebug() << "CSV file saved to:" << filePath;
+    // 弹出保存成功的提示
+    QMessageBox::information(nullptr, "提示", "数据已导出");
+}
+
+void showOne::openkz()
+{
+    // Hide the main window
+    this->close();
+    //this->hide();
+    SerialPortView* showdata = new SerialPortView();
+    //showdata->initiShow();
+    showdata->show();
 }
 
 

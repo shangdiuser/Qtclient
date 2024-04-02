@@ -22,13 +22,13 @@ int main(int argc, char *argv[])
    // data.show();
    // data.initiShow();
    
-  /*
+  
     showOne s;
    s.showInfo();
     s.show();
-*/
-    SerialPortView s;
-    s.show();
+
+   // SerialPortView l;
+   // l.show();
   
 
     return a.exec();

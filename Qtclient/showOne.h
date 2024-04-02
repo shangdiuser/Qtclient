@@ -15,6 +15,7 @@
 #include <QDir>
 #include <QMessageBox>
 #include<QObject>
+#include "SerialPortView.h"
 class showOne : public QMainWindow
 {
 	Q_OBJECT
@@ -35,6 +36,7 @@ public:
 	void openQueryDialog();
 	void dowExcel();
 	void writeCSV(const QString& filePath, const QStringList& headers, const QList<QStringList>& data);
+	void openkz();
 
 private:
 	Ui::showOneClass ui;
